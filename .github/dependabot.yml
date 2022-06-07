@@ -14,4 +14,4 @@ updates:
     allow:
       - dependency-type: "all"
     commit-message: 
-      - prefix: "PRTD-???"
+      prefix: "PRTD-???"
