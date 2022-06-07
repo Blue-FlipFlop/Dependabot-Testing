@@ -13,3 +13,5 @@ updates:
       timezone: "Canada/Eastern"
     allow:
       - dependency-type: "all"
+    commit-message: 
+      - prefix: "PRTD-???"
