@@ -29,4 +29,4 @@ jobs:
           file-path: .github/dependabot.yml
           commit-msg: Add Dependabot Project Key
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "${{ github.ref_name }}"
+          branch: "${{ GITHUB_HEAD_REF }}"
