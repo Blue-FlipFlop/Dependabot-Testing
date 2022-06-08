@@ -14,5 +14,5 @@ updates:
     allow:
       - dependency-type: "direct"
     commit-message:
-      prefix:
+      prefix: RICKY-0
     open-pull-requests-limit: 2
