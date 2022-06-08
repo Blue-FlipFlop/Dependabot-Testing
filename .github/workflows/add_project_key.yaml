@@ -1,15 +1,20 @@
-name: Add Project Key to Dependabot
+name: Verify Dependabot Project Key 
 
 on:
   push:
     branches:
       - 'main'
+      - 'master'
+    paths:
+      - '.github/dependabot.yml'
+      - '.github/workflows/master_pull_request.yaml'
+
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  Add-Project-Key:
+  Verify-Dependabot-Project-Key:
     runs-on: ubuntu-latest
 
     steps:
