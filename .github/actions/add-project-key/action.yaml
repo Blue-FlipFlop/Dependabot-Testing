@@ -1,9 +1,4 @@
 runs:
   using: 'composite'
   steps:
-    - name: Add Project Key to Dependabot Configuration File
-      run: |
-        projectKey=$(cat .github/workflows/master_pull_request.yaml|grep 'projectKey:'|awk -F ':' '{print $2}'|xargs echo)
-        sed -i "s/prefix:.*/prefix: ${projectKey}-0/g" .github/dependabot.yml
-      shell: bash
-      
+    

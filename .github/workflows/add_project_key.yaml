@@ -1,7 +1,7 @@
 name: Verify Dependabot Project Key 
 
 on:
-  push:
+  pull_request:
     branches:
       - 'main'
       - 'master'
@@ -18,15 +18,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # - uses: actions/checkout@v2
+
+      # - name: Add Project Key to Dependabot
+      # uses: ./.github/actions/add-project-key
+
       - uses: actions/checkout@v2
-
-      - name: Add Project Key to Dependabot
-        uses: ./.github/actions/add-project-key
-
-      - name: Update files on GitHub
-        uses: test-room-7/action-update-file@v1.6.0
         with:
-          file-path: .github/dependabot.yml
-          commit-msg: Add Dependabot Project Key
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${GITHUB_REF##*/}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Add Project Key to Dependabot Configuration File
+        run: |
+          projectKey=$(cat .github/workflows/master_pull_request.yaml|grep 'projectKey:'|awk -F ':' '{print $2}'|xargs echo)
+          sed -i "s/prefix:.*/prefix: ${projectKey}-0/g" .github/dependabot.yml
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Add Project Key"
+        shell: bash
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.head_ref }}
