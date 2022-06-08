@@ -14,4 +14,5 @@ updates:
     allow:
       - dependency-type: "direct"
     commit-message: 
-      prefix: "PRTD-???"
+      prefix: "PRTD-1"
+    open-pull-requests-limit: 2
