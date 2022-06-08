@@ -12,6 +12,6 @@ updates:
       time: "13:53"
       timezone: "Canada/Eastern"
     allow:
-      - dependency-type: "all"
+      - dependency-type: "direct"
     commit-message: 
       prefix: "PRTD-???"
