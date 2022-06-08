@@ -1,0 +1,19 @@
+name: Validate PR Prefix
+
+on:
+  push:
+    branches-ignore:
+      - '**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  Validate-PR-Prefix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enforce Jira Issue Key in Pull Request Title
+        uses: ryanvade/enforce-pr-title-style-action@v1
+        with:
+          projectKey: RICKY

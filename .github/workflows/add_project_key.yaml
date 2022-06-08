@@ -1,0 +1,17 @@
+name: Add Project Key to Dependabot
+
+on:
+  push:
+    branches-ignore:
+      - '**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  Validate-PR-Prefix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add Project Key to Dependabot
+        uses: ./.github/actions/patch-project-key

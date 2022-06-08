@@ -13,6 +13,7 @@ updates:
       timezone: "Canada/Eastern"
     allow:
       - dependency-type: "direct"
-    commit-message: 
-      prefix: "PRTD-1"
+    commit-message:
+      # The prefix is changed using a GitHub workflow (add_project_key)
+      prefix:
     open-pull-requests-limit: 2
