@@ -22,11 +22,3 @@ jobs:
 
       - name: Add Project Key to Dependabot
         uses: ./.github/actions/add-project-key
-
-      - name: Update files on GitHub
-        uses: test-room-7/action-update-file@v1.6.0
-        with:
-          file-path: .github/dependabot.yml
-          commit-msg: Add Dependabot Project Key
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "${{ github.head_ref }}"
