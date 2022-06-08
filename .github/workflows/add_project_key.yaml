@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Add Project Key to Dependabot
-        uses: ./.github/actions/patch-project-key
+        uses: ./.github/actions/add-project-key
 
       - name: Update files on GitHub
         uses: test-room-7/action-update-file@v1.6.0
