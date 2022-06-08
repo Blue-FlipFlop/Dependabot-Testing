@@ -9,5 +9,5 @@ runs:
         git config user.email github-actions@github.com
         git add .
         git commit -m "Add Project Key"
-        git push
+        git push origin HEAD:"${{ github.head_ref }}"
       shell: bash
