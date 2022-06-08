@@ -14,6 +14,5 @@ updates:
     allow:
       - dependency-type: "direct"
     commit-message:
-      # The prefix is changed using a GitHub workflow (add_project_key)
       prefix:
     open-pull-requests-limit: 2
