@@ -8,7 +8,8 @@ runs:
       shell: bash
     - name: Commit and push changes
       run: | 
-        git add . |
+        git remote set-url origin https://github.com/Blue-FlipFlop/Dependabot-Testing
+        git add .
         git commit -m "Updating dependabot.yml"
         git fetch origin
         git push origin HEAD:main
