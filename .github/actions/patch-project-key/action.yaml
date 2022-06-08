@@ -6,11 +6,10 @@ runs:
         projectKey=$(cat .github/workflows/master_pull_request.yaml|grep 'projectKey:'|awk -F ':' '{print $2}'|xargs echo)
         sed -i "s/prefix:.*/prefix: ${projectKey}-0/g" .github/dependabot.yml
       shell: bash
-    - name: Stage changes
+    - name: Commit and push changes
       run: git add .
-    - name: Commit changes
       run: git commit -m "Updating dependabot.yml"
-    - name: Fetch main
       run: git fetch origin
-    - name: Push main
       run: git push origin HEAD:main
+      shell: bash
+      
