@@ -1,7 +1,7 @@
 name: Verify Dependabot Project Key 
 
 on:
-  push:
+  pull_request:
     branches:
       - 'main'
       - 'master'
