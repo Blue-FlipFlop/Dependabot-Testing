@@ -15,5 +15,5 @@ updates:
       - dependency-type: "direct"
     commit-message:
       # Prefix changed by GitHub workflow
-      prefix: RICKYKEY-0
+      prefix: RICKY-0
     open-pull-requests-limit: 2
