@@ -1,14 +1,4 @@
 runs:
   using: 'composite'
   steps:
-    - name: Add Project Key to Dependabot Configuration File
-      run: |
-        projectKey=$(cat .github/workflows/master_pull_request.yaml|grep 'projectKey:'|awk -F ':' '{print $2}'|xargs echo)
-        sed -i "s/prefix:.*/prefix: ${projectKey}-0/g" .github/dependabot.yml
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git pull "${{ github.head_ref }}"
-        git add .
-        git commit -m "Add Project Key"
-        git push origin HEAD:"${{ github.head_ref }}"
-      shell: bash
+    
