@@ -7,9 +7,10 @@ runs:
         sed -i "s/prefix:.*/prefix: ${projectKey}-0/g" .github/dependabot.yml
       shell: bash
     - name: Commit and push changes
-      run: git add .
-      run: git commit -m "Updating dependabot.yml"
-      run: git fetch origin
-      run: git push origin HEAD:main
+      run: | 
+        git add . |
+        git commit -m "Updating dependabot.yml"
+        git fetch origin
+        git push origin HEAD:main
       shell: bash
       
