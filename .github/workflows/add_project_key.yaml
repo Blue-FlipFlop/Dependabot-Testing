@@ -34,6 +34,7 @@ jobs:
           sed -i "s/prefix:.*/prefix: ${projectKey}-0/g" .github/dependabot.yml
           git config user.name github-actions
           git config user.email github-actions@github.com
+          git add .
           git commit -m "Add Project Key"
         shell: bash
 
