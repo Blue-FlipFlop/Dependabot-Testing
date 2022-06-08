@@ -1,7 +1,10 @@
-name: Validate PR Prefix
+name: Validate Source Code
 
 on:
   push:
+    paths-ignore:
+      - 'package.json'
+      - 'package-lock.json'
     branches-ignore:
       - '**'
 
@@ -9,13 +12,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  Validate-PR-Prefix:
+  Validate-Source-Code:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
       - name: Enforce Jira Issue Key in Pull Request Title
         uses: ryanvade/enforce-pr-title-style-action@v1
         with:
-          projectKey: RICKYKEY
+          projectKey: RICKY
