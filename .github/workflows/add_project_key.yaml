@@ -13,5 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
       - name: Add Project Key to Dependabot
         uses: ./.github/actions/patch-project-key
