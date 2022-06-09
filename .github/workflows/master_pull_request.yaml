@@ -16,10 +16,10 @@ jobs:
       - name: View Expected
         run: |
           echo dependabot[bot]
-          echo ${{ github.event.pull_request.user.login }} != 'dependabot[bot]'}}
+          echo ${{ github.event.pull_request.user.login != 'dependabot[bot]' }}
       - name: Enforce Jira Issue Key in Pull Request Title
         uses: ryanvade/enforce-pr-title-style-action@v1
-        if: ${{ github.event.pull_request.user.login }} != 'dependabot[bot]'}}
+        if: ${{ github.event.pull_request.user.login != 'dependabot[bot]'}}
         with:
           projectKey: RICKY
 
