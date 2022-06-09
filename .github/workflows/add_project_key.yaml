@@ -2,8 +2,6 @@ name: Verify Dependabot Project Key
 
 on:
   push:
-    branches-ignore:
-      - 'main'
     paths:
       - '.github/dependabot.yml'
       - '.github/workflows/master_pull_request.yaml'
