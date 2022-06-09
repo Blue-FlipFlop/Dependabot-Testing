@@ -11,6 +11,8 @@ jobs:
   Validate-Source-Code:
     runs-on: ubuntu-latest
     steps:
+      - name: View PR author
+        run: echo "This PR is opened by ${{ github.event.pull_request.user.login }} ."
       - name: Enforce Jira Issue Key in Pull Request Title
         uses: ryanvade/enforce-pr-title-style-action@v1
         if: ${{ github.event.issue.user.login != 'dependabot[bot]'}}
