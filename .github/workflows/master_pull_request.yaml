@@ -16,3 +16,5 @@ jobs:
         if: ${{ github.actor != 'dependabot[bot]'}}
         with:
           projectKey: RICKY
+
+      - uses: actions/checkout@v2
