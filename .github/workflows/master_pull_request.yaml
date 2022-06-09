@@ -2,9 +2,6 @@ name: Validate Source Code
 
 on:
   pull_request:
-    paths-ignore:
-      - 'package.json'
-      - 'package-lock.json'
     branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -13,9 +10,9 @@ on:
 jobs:
   Validate-Source-Code:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'dependabot[bot]'}}
     steps:
       - name: Enforce Jira Issue Key in Pull Request Title
         uses: ryanvade/enforce-pr-title-style-action@v1
+        if: ${{ github.actor != 'dependabot[bot]'}}
         with:
           projectKey: RICKY
