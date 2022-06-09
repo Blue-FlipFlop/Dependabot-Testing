@@ -1,7 +1,7 @@
 name: Verify Dependabot Project Key 
 
 on:
-  push:
+  pull_request:
     paths:
       - '.github/dependabot.yml'
       - '.github/workflows/master_pull_request.yaml'
