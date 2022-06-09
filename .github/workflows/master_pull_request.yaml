@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Enforce Jira Issue Key in Pull Request Title
         uses: ryanvade/enforce-pr-title-style-action@v1
-        if: ${{ github.actor != 'dependabot[bot]'}}
+        if: ${{ github.event.issue.user.login != 'dependabot[bot]'}}
         with:
           projectKey: RICKY
 
