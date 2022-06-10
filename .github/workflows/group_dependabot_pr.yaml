@@ -64,7 +64,7 @@ jobs:
         basebranch="${BASE_BRANCH%\"}"
         basebranch="${basebranch#\"}"
         
-        git config pull.rebase true
+        git config pull.rebase false
         git config user.name github-actions
         git config user.email github-actions@github.com
         
