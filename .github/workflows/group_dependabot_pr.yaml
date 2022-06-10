@@ -1,0 +1,92 @@
+name: Validate Source Code
+
+on:
+  pull_request:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  combine-prs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v3
+        id: fetch-branch-names
+        name: Fetch branch names
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const pulls = await github.paginate('GET /repos/:owner/:repo/pulls', {
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+
+            branches = []
+            prs = []
+            
+            for (const pull of pulls) {
+              const branch = pull['head']['ref'];
+              if (branch.startsWith('dependabot/npm_and_yarn/aws-sdk/')) {
+                console.log('Branch matched: ' + branch);
+                branches.push(branch);
+                base_branch = pull['base']['ref'];
+                prs.push('#' + pull['number'] + ' ' + pull['title']);
+              }
+            }
+
+            if (branches.length == 0) {
+              core.setFailed('No PRs/branches matched criteria');
+              return
+            }
+
+            core.setOutput('base-branch', base_branch);
+            core.setOutput('prs-string', prs.join('\n'));
+            
+            combined = branches.join(' ')
+            console.log('Combined: ' + combined);
+            return combined
+
+    - uses: actions/checkout@v2.3.3
+      with:
+        fetch-depth: 0
+
+    - name: Created combined branch
+      env:
+        BASE_BRANCH: ${{ steps.fetch-branch-names.outputs.base-branch }}
+        BRANCHES_TO_COMBINE: ${{ steps.fetch-branch-names.outputs.result }}
+        COMBINE_BRANCH_NAME: combined-aws-sdk-dependecies
+      run: |
+        echo "$BRANCHES_TO_COMBINE"
+        sourcebranches="${BRANCHES_TO_COMBINE%\"}"
+        sourcebranches="${sourcebranches#\"}"
+        
+        basebranch="${BASE_BRANCH%\"}"
+        basebranch="${basebranch#\"}"
+        
+        git config pull.rebase false
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        
+        git branch $COMBINE_BRANCH_NAME $basebranch
+        git checkout $COMBINE_BRANCH_NAME
+        git pull origin $sourcebranches --no-edit
+        git push origin $COMBINE_BRANCH_NAME
+    # Creates a PR with the new combined branch
+    - uses: actions/github-script@v3
+      name: Create Combined Pull Request
+      env:
+        PRS_STRING: ${{ steps.fetch-branch-names.outputs.prs-string }}
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const prString = process.env.PRS_STRING;
+          const body = 'This PR was created by the Combine PRs action by combining the following PRs:\n' + prString;
+          await github.pulls.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: 'Combined PR',
+            head: '${{ github.event.inputs.combineBranchName }}',
+            base: '${{ steps.fetch-branch-names.outputs.base-branch }}',
+            body: body
+          });
