@@ -1,4 +1,4 @@
-name: Validate Source Code
+name: Group Dependabot PRs
 
 on:
   pull_request:
@@ -12,40 +12,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/github-script@v3
-        id: fetch-branch-names
-        name: Fetch branch names
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const pulls = await github.paginate('GET /repos/:owner/:repo/pulls', {
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
+      id: fetch-branch-names
+      name: Fetch branch names
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const pulls = await github.paginate('GET /repos/:owner/:repo/pulls', {
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          });
 
-            branches = []
-            prs = []
-            
-            for (const pull of pulls) {
-              const branch = pull['head']['ref'];
-              if (branch.startsWith('dependabot/npm_and_yarn/aws-sdk/')) {
-                console.log('Branch matched: ' + branch);
-                branches.push(branch);
-                base_branch = pull['base']['ref'];
-                prs.push('#' + pull['number'] + ' ' + pull['title']);
-              }
+          branches = []
+          prs = []
+          
+          for (const pull of pulls) {
+            const branch = pull['head']['ref'];
+            if (branch.startsWith('dependabot/npm_and_yarn/aws-sdk/')) {
+              console.log('Branch matched: ' + branch);
+              branches.push(branch);
+              base_branch = pull['base']['ref'];
+              prs.push('#' + pull['number'] + ' ' + pull['title']);
             }
+          }
 
-            if (branches.length == 0) {
-              core.setFailed('No PRs/branches matched criteria');
-              return
-            }
+          if (branches.length == 0) {
+            core.setFailed('No PRs/branches matched criteria');
+            return
+          }
 
-            core.setOutput('base-branch', base_branch);
-            core.setOutput('prs-string', prs.join('\n'));
-            
-            combined = branches.join(' ')
-            console.log('Combined: ' + combined);
-            return combined
+          core.setOutput('base-branch', base_branch);
+          core.setOutput('prs-string', prs.join('\n'));
+          
+          combined = branches.join(' ')
+          console.log('Combined: ' + combined);
+          return combined
 
     - uses: actions/checkout@v2.3.3
       with:
