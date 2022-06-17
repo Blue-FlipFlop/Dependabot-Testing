@@ -14,7 +14,7 @@ updates:
     allow:
       - dependency-type: "direct"
     commit-message:
-      prefix: RICKY-1
+      prefix: RICKY-2
     open-pull-requests-limit: 2
     ignore: 
-      - dependency-name: "auth0"
+      - dependency-name: "mongoose"
