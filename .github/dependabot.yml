@@ -20,7 +20,7 @@ updates:
       - dependency-name: "mongoose"
 
   - package-ecosystem: "npm" # See documentation for possible values
-  directory: "/layers/" # Location of package manifests
+    directory: "/layers/" # Location of package manifests
     schedule:
       interval: "daily"
       time: "13:53"
