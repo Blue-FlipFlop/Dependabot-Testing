@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "auth0": "~2.37.0"
+    "auth0": "~2.42.0"
   }
 }
