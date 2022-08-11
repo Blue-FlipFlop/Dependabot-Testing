@@ -1,0 +1,8 @@
+{
+  "name": "bappname",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "auth0": "~2.37.0"
+  }
+}
