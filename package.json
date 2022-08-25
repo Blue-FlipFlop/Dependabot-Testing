@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "auth0": "~2.37.0",
+    "chai": "~4.3.6",
     "cypress": "~10.6.0",
     "mongoose": "^6.2.3",
     "validator": "^13.7.0"
+  },
+  "scripts": {
+    "cy:runSandbox": "cypress run --headed --browser chrome --config-file cypress/cypress.config.js --record --key 2ede467f-d100-4c79-8899-11181c39c6ee"
   }
 }
