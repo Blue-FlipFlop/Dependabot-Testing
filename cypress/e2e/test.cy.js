@@ -1,13 +1,10 @@
 const { assert } = require("chai")
 
-describe('empty spec', () => {
-  it('passes', () => {
-    assert(true);
-  })
+describe('Example flaky test', () => {
+  var attemptNumber = 0;
 
-  it('sometimes passes', () => {
-    var result = Math.floor(Math.random() * 3);
-    console.log(result);
-    assert(result == 0)
+  it('passes 3rd time', () => {
+    attemptNumber++;
+    assert(attemptNumber === 3);
   })
 })

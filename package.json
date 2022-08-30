@@ -10,6 +10,6 @@
     "validator": "^13.7.0"
   },
   "scripts": {
-    "cy:runSandbox": "cypress run --headed --browser chrome --config-file cypress/cypress.config.js --record --key 2ede467f-d100-4c79-8899-11181c39c6ee"
+    "cy:runSandbox": "env-cmd -f ./cypress/env/env.cypress.sandbox cypress run --headed --browser chrome --config-file cypress/cypress.config.js --record"
   }
 }
