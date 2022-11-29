@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "auth0": "~2.37.0",
-    "mongoose": "~6.2.3",
+    "mongoose": "~6.7.4",
     "validator": "~13.7.0"
   }
 }
